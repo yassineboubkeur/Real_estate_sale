@@ -1,4 +1,4 @@
-import React from "react";
+import logo from '../assets/images/logo1.jpeg';
 import { Link } from 'react-router-dom';
 
 const NavBar = () => {
@@ -11,8 +11,8 @@ const NavBar = () => {
           style={{ zIndex: 2000 }}
         >
           <div className="container">
-            <Link className="navbar-brand" to="/">
-              <strong>MDB</strong>
+            <Link className="navbar-brand" to="/home">
+            <img src={logo} alt="Logo" style={{ height: '40px'  }} /> {/* Logo ajusté */}
             </Link>
             <button
               className="navbar-toggler"
@@ -46,6 +46,11 @@ const NavBar = () => {
                 <li className="nav-item">
                 <Link className="nav-link active" to="/contact">
                     Contact Us
+                  </Link>
+                </li>
+                <li className="nav-item">
+                <Link className="nav-link active" to="/privacy">
+                    Privacy Policy
                   </Link>
                 </li>
               </ul>
