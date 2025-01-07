@@ -2,12 +2,14 @@
 import buildingImage from "../assets/images/image buildingblu.jpg";
 import buildingImage2 from "../assets/images/bg1.png";
 import buildingImage3 from "../assets/images/purple.png";
+import AutoCarouselWithCards from "./views/Carousel";
 
 // buildingImage3
 
 const HomePage = () => {
   return (
     <div>
+      
       {/* Banner */}
       <div
         id="intro"
@@ -44,7 +46,7 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-
+      <AutoCarouselWithCards/>
       {/* Search Section */}
       <section
         className="bg-light py-5"
