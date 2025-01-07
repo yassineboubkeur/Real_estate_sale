@@ -53,3 +53,7 @@
     background-color: #2575fc; /* Example hover background for dropdown items */
     color: white !important;
   }
+  .logo:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2)); /* Add shadow on hover */
+  }

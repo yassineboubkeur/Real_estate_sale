@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './NavBar.css'; // Custom CSS for the logo
+import Logo from './Parts/Logo';
 
 const NavBar = () => {
   return (
@@ -14,9 +15,79 @@ const NavBar = () => {
           <div className="container">
             {/* Logo */}
             <Link className="navbar-brand" to="/home">
-              <div className="logo">
-                <span className="logo-highlight">Get</span> House
-              </div>
+              {/* <div className="logo">
+                <span className="logo-highlight">Get</span><span className='bg-danger'>House</span> 
+              </div> */}
+             <div className="logo">
+      <span className="logo-highlight animated-logo">Get</span>
+      <span className="bg-danger animated-logo">House</span>
+
+      {/* Add custom styles */}
+      <style jsx>{`
+        .logo {
+          font-size: 2.5rem;
+          font-weight: bold;
+          display: inline-block;
+          cursor: pointer;
+        }
+        .logo-highlight {
+          color: #007bff; /* Blue color for "Get" */
+        }
+        .bg-danger {
+          color: white; /* White text for "House" */
+          padding: 0 5px;
+          border-radius: 5px;
+        }
+        .animated-logo {
+          display: inline-block;
+          opacity: 0;
+          animation: fadeIn 1.5s forwards;
+        }
+        .animated-logo:nth-child(1) {
+          animation-delay: 0.5s;
+        }
+        .animated-logo:nth-child(2) {
+          animation-delay: 1s;
+        }
+        @keyframes fadeIn {
+          to {
+            opacity: 1;
+          }
+        }
+        .logo:hover .logo-highlight {
+          color: #0056b3; /* Darker blue on hover */
+          transition: color 0.3s ease;
+        }
+        .logo:hover .bg-danger {
+          background-color: #dc3545; /* Brighter red on hover */
+          transition: background-color 0.3s ease;
+        }
+      `}</style>
+    </div>
+
+<style jsx>{`
+  .logo {
+    display: inline-block;
+    font-size: 24px;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+  }
+
+  .logo:hover {
+    transform: scale(1.1); /* Scale up by 10% on hover */
+  }
+
+  .logo-highlight {
+    color: #007bff; /* Blue color for "Get" */
+  }
+
+  .logo-danger {
+    color: white; /* White text for "House" */
+    padding: 2px 5px;
+    border-radius: 4px;
+  }
+`}</style>
+              {/* <Logo/> */}
             </Link>
 
             {/* Navbar Toggler */}

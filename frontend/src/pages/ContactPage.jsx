@@ -43,7 +43,7 @@ const ContactUsPage = () => {
             type="text"
             id="name"
             name="name"
-            className="form-control"
+            className="form-control custom-input"
             placeholder="Enter your name"
             value={formData.name}
             onChange={handleChange}
@@ -58,7 +58,7 @@ const ContactUsPage = () => {
             type="email"
             id="email"
             name="email"
-            className="form-control"
+            className="form-control custom-input"
             placeholder="Enter your email"
             value={formData.email}
             onChange={handleChange}
@@ -73,7 +73,7 @@ const ContactUsPage = () => {
             type="tel"
             id="phone"
             name="phone"
-            className="form-control"
+            className="form-control custom-input"
             placeholder="Enter your phone number"
             value={formData.phone}
             onChange={handleChange}
@@ -88,7 +88,7 @@ const ContactUsPage = () => {
             type="text"
             id="subject"
             name="subject"
-            className="form-control"
+            className="form-control custom-input"
             placeholder="Enter the subject"
             value={formData.subject}
             onChange={handleChange}
@@ -102,7 +102,7 @@ const ContactUsPage = () => {
           <textarea
             id="message"
             name="message"
-            className="form-control"
+            className="form-control custom-input"
             placeholder="Enter your message"
             value={formData.message}
             onChange={handleChange}
@@ -133,6 +133,32 @@ const ContactUsPage = () => {
         <p>Phone: +123 456 7890</p>
         <p>Address: 1234 Street Name, City, Country</p>
       </div>
+
+      {/* Add custom styles */}
+      <style jsx>{`
+        .custom-input {
+          border: 2px solid #ced4da;
+          border-radius: 8px;
+          padding: 10px;
+          transition: border-color 0.3s ease;
+        }
+        .custom-input:focus {
+          border-color: #80bdff;
+          outline: none;
+          box-shadow: 0 0 5px rgba(128, 189, 255, 0.5);
+        }
+        .btn-primary {
+          background-color: #007bff;
+          border: none;
+          border-radius: 8px;
+          padding: 10px;
+          font-size: 16px;
+          transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+          background-color: #0056b3;
+        }
+      `}</style>
     </div>
   );
 };
