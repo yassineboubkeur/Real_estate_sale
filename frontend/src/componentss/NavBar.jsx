@@ -14,7 +14,7 @@ const NavBar = () => {
         >
           <div className="container">
             {/* Logo */}
-            <Link className="navbar-brand" to="/home">
+            <Link className="navbar-brand" to="/">
               {/* <div className="logo">
                 <span className="logo-highlight">Get</span><span className='bg-danger'>House</span> 
               </div> */}
@@ -107,7 +107,7 @@ const NavBar = () => {
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav me-auto">
                 <li className="nav-item">
-                  <Link className="nav-link active" to="/home">
+                  <Link className="nav-link active" to="/">
                     Home
                   </Link>
                 </li>

@@ -12,6 +12,7 @@ const Layout = () => {
     
       <main>
         {/* Le composant Outlet permet d'afficher le contenu des pages spécifiques */}
+    
         <Outlet />
       </main>
       <Footer />
