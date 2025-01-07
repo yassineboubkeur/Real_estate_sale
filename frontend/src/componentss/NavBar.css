@@ -1,0 +1,55 @@
+/* NavBar.css */
+.logo {
+    font-family: 'Poppins', sans-serif; /* Use a modern font */
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffffff; /* White text */
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo-highlight {
+    color: #ff6b6b; /* Highlight color for "Get" */
+    margin-right: 5px;
+  }
+  
+  .logo:hover {
+    text-decoration: none; /* Remove underline on hover */
+  }
+
+  /* NavBar.css */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: linear-gradient(135deg, #056683, #097258); /* Example gradient */
+  }
+  
+  .navbar-brand {
+    margin-right: 2rem; /* Adds space between the logo and the menu */
+  }
+  
+  .navbar-nav {
+    margin-left: auto; /* Pushes the menu items to the right */
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .logo-highlight {
+    color: #ff6b6b; /* Example highlight color */
+  }
+  
+  /* Optional: Add hover effects for links */
+  .nav-link:hover {
+    color: #ff6b6b !important; /* Example hover color */
+  }
+  
+  .dropdown-item:hover {
+    background-color: #2575fc; /* Example hover background for dropdown items */
+    color: white !important;
+  }
