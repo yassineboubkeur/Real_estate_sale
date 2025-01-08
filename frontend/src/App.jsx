@@ -21,10 +21,9 @@ const App = () => {
     <div>
        <Router>
         <Routes>
-          {/* Route principale qui utilise Layout */}
+          
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} /> {/* Default route for "/" */}
-            {/* <Route path="/home" element={<HomePage />} /> */}
             <Route path="/about" element={<AboutPage />} />
             <Route path="/properties" element={<PropertiesPage />} />
             <Route path="/contact" element={<ContactUsPage />} />

@@ -1,10 +1,10 @@
 const express = require('express');
 const cors = require('cors');
-const db = require('./db'); // Importez la configuration de la base de données (si elle existe)
+const userRoutes = require('./routes/userRoutes.js'); // Importez les routes utilisateur
 
 const app = express();
 
-// Configurer CORS pour permettre les requêtes depuis http://localhost:5173
+// Configurer CORS
 app.use(cors({
   origin: 'http://localhost:5173',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -14,32 +14,8 @@ app.use(cors({
 // Middleware pour parser les données JSON
 app.use(express.json());
 
-// Route pour l'enregistrement des utilisateurs
-app.post('/register', (req, res) => {
-  const { name, email, password, phone, address, gender } = req.body;
-
-  // Vérifiez si l'utilisateur existe déjà
-  db.query('SELECT * FROM users WHERE email = ?', [email], (err, result) => {
-    if (err) {
-      return res.status(500).json({ message: 'Database error', error: err });
-    }
-    if (result.length > 0) {
-      return res.status(400).json({ message: 'Email already in use' });
-    }
-
-    // Si l'email est unique, insérer les données de l'utilisateur
-    db.query(
-      'INSERT INTO users (name, email, password, phone, address, gender) VALUES (?, ?, ?, ?, ?, ?)',
-      [name, email, password, phone, address, gender],
-      (err, result) => {
-        if (err) {
-          return res.status(500).json({ message: 'Database error', error: err });
-        }
-        return res.status(201).json({ message: 'User registered successfully', userId: result.insertId });
-      }
-    );
-  });
-});
+// Utiliser les routes utilisateur
+app.use('/api/users', userRoutes);
 
 // Démarrer le serveur
 const PORT = 3000;

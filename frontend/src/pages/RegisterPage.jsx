@@ -15,16 +15,53 @@ const RegisterPage = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
-    // Handle form submission logic here (e.g., API call)
-    console.log("Form Submitted", formData);
+  
+    try {
+      const response = await fetch("http://localhost:3000/api/users/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+          phone: formData.phone,
+          address: formData.address,
+          gender: formData.gender,
+        }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        alert("User registered successfully!");
+        console.log(data); // Vous pouvez rediriger ou mettre à jour l'état si nécessaire
+      } else {
+        alert(data.message || "An error occurred. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Unable to connect to the server. Please try again later.");
+    }
   };
+  
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (formData.password !== formData.confirmPassword) {
+  //     alert("Passwords do not match!");
+  //     return;
+  //   }
+  //   // Handle form submission logic here (e.g., API call)
+  //   console.log("Form Submitted", formData);
+  // };
 
   return (
     <div className="min-vh-100 d-flex align-items-center justify-content-center bg-light py-5">
