@@ -1,10 +1,16 @@
-import { useState } from "react";
+
+import React, { useState } from 'react';
+import { useAuth } from '../auth/AuthContext'; // Import useAuth
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const { login } = useAuth(); // Get the login function from AuthContext
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,7 +35,9 @@ const LoginPage = () => {
 
       if (response.ok) {
         alert("Login successful!");
-        console.log(data); // Handle successful login (e.g., redirect to dashboard)
+        login(); // Update authentication state
+        localStorage.setItem('user', JSON.stringify(data.user)); // Store user data
+        navigate("/"); // Redirect to the home page
       } else {
         alert(data.message || "An error occurred. Please try again.");
       }
@@ -133,8 +141,9 @@ const LoginPage = () => {
 export default LoginPage;
 
 
-
-// import { useState } from "react";
+// import React, { useState } from 'react';
+// import { useAuth } from '../auth/AuthContext';
+// // import { useAuth } from './AuthContext';
 
 // const LoginPage = () => {
 //   const [formData, setFormData] = useState({
@@ -142,15 +151,40 @@ export default LoginPage;
 //     password: "",
 //   });
 
+//   const { login } = useAuth();
+// // const {}=useAuth
 //   const handleChange = (e) => {
 //     const { name, value } = e.target;
 //     setFormData({ ...formData, [name]: value });
 //   };
 
-//   const handleSubmit = (e) => {
+//   const handleSubmit = async (e) => {
 //     e.preventDefault();
-//     // Handle form submission logic here (e.g., API call)
-//     console.log("Form Submitted", formData);
+//     try {
+//       const response = await fetch("http://localhost:3000/api/users/login", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({
+//           email: formData.email,
+//           password: formData.password,
+//         }),
+//       });
+  
+//       const data = await response.json();
+  
+//       if (response.ok) {
+//         alert("Login successful!");
+//         login(); // Update authentication state
+//         localStorage.setItem('user', JSON.stringify(data.user)); // Store user data
+//       } else {
+//         alert(data.message || "An error occurred. Please try again.");
+//       }
+//     } catch (error) {
+//       console.error("Error:", error);
+//       alert("Unable to connect to the server. Please try again later.");
+//     }
 //   };
 
 //   return (

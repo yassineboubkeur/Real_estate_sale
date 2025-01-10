@@ -1,9 +1,17 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './NavBar.css'; // Custom CSS for the logo
-import Logo from './Parts/Logo';
+import { useAuth } from '../auth/AuthContext';
+// import { AuthContext } from '../auth/AuthProvider'; // Import the useAuth hook
 
 const NavBar = () => {
+  const {isAuthenticated, logout}=useAuth();
+  // const {}=AuthContext
+  // const {useAuth}=AuthContext();
+  // const { isAuthenticated, logout } = useAuth(); 
+  // Get authentication state and logout function
+
   return (
     <div>
       <header>
@@ -15,79 +23,50 @@ const NavBar = () => {
           <div className="container">
             {/* Logo */}
             <Link className="navbar-brand" to="/">
-              {/* <div className="logo">
-                <span className="logo-highlight">Get</span><span className='bg-danger'>House</span> 
-              </div> */}
-             <div className="logo">
-      <span className="logo-highlight animated-logo">Get</span>
-      <span className="bg-danger animated-logo">House</span>
-
-      {/* Add custom styles */}
-      <style jsx>{`
-        .logo {
-          font-size: 2.5rem;
-          font-weight: bold;
-          display: inline-block;
-          cursor: pointer;
-        }
-        .logo-highlight {
-          color: #007bff; /* Blue color for "Get" */
-        }
-        .bg-danger {
-          color: white; /* White text for "House" */
-          padding: 0 5px;
-          border-radius: 5px;
-        }
-        .animated-logo {
-          display: inline-block;
-          opacity: 0;
-          animation: fadeIn 1.5s forwards;
-        }
-        .animated-logo:nth-child(1) {
-          animation-delay: 0.5s;
-        }
-        .animated-logo:nth-child(2) {
-          animation-delay: 1s;
-        }
-        @keyframes fadeIn {
-          to {
-            opacity: 1;
-          }
-        }
-        .logo:hover .logo-highlight {
-          color: #0056b3; /* Darker blue on hover */
-          transition: color 0.3s ease;
-        }
-        .logo:hover .bg-danger {
-          background-color: #dc3545; /* Brighter red on hover */
-          transition: background-color 0.3s ease;
-        }
-      `}</style>
-    </div>
-
-<style jsx>{`
-  .logo {
-    display: inline-block;
-    font-size: 24px;
-    font-weight: bold;
-    transition: transform 0.3s ease;
-  }
-
-  .logo:hover {
-    transform: scale(1.1); /* Scale up by 10% on hover */
-  }
-
-  .logo-highlight {
-    color: #007bff; /* Blue color for "Get" */
-  }
-
-  .logo-danger {
-    color: white; /* White text for "House" */
-    padding: 2px 5px;
-    border-radius: 4px;
-  }
-`}</style>
-              {/* <Logo/> */}
+              <div className="logo">
+                <span className="logo-highlight animated-logo">Get</span>
+                <span className="bg-danger animated-logo">House</span>
+              </div>
+              <style jsx>{`
+                .logo {
+                  font-size: 2.5rem;
+                  font-weight: bold;
+                  display: inline-block;
+                  cursor: pointer;
+                }
+                .logo-highlight {
+                  color: #007bff; /* Blue color for "Get" */
+                }
+                .bg-danger {
+                  color: white; /* White text for "House" */
+                  padding: 0 5px;
+                  border-radius: 5px;
+                }
+                .animated-logo {
+                  display: inline-block;
+                  opacity: 0;
+                  animation: fadeIn 1.5s forwards;
+                }
+                .animated-logo:nth-child(1) {
+                  animation-delay: 0.5s;
+                }
+                .animated-logo:nth-child(2) {
+                  animation-delay: 1s;
+                }
+                @keyframes fadeIn {
+                  to {
+                    opacity: 1;
+                  }
+                }
+                .logo:hover .logo-highlight {
+                  color: #0056b3; /* Darker blue on hover */
+                  transition: color 0.3s ease;
+                }
+                .logo:hover .bg-danger {
+                  background-color: #dc3545; /* Brighter red on hover */
+                  transition: background-color 0.3s ease;
+                }
+              `}</style>
             </Link>
 
             {/* Navbar Toggler */}
@@ -160,18 +139,26 @@ const NavBar = () => {
                 </button>
               </form>
 
-              {/* Login and Register Buttons */}
+              {/* Conditional Rendering Based on Authentication State */}
               <ul className="navbar-nav">
-                <li className="nav-item">
-                  <Link className="nav-link" to="/login">
-                    <button className="btn btn-outline-primary">Login</button>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/register">
-                    <button className="btn btn-primary">Register</button>
-                  </Link>
-                </li>
+             
+                      {isAuthenticated ? (
+                  // Show "Disconnect" button if authenticated
+                  <button onClick={logout} className="btn btn-danger">
+                    Disconnect
+                  </button>
+                ) : (
+                  // Show "Login" and "Register" buttons if not authenticated
+                  <>
+                    <Link to="/login" className="btn btn-outline-primary">
+                      Login
+                    </Link>
+                    <Link to="/register" className="btn btn-primary">
+                      Register
+                    </Link>
+                  </>
+                )}
+                
               </ul>
             </div>
           </div>
@@ -183,8 +170,13 @@ const NavBar = () => {
 
 export default NavBar;
 
-// import logo from '../assets/images/logo1.jpeg';
+// import React from 'react';
 // import { Link } from 'react-router-dom';
+// import './NavBar.css'; // Custom CSS for the logo
+// import Logo from './Parts/Logo';
+// import { AuthContext } from '../context/contextprovider';
+
+
 
 // const NavBar = () => {
 //   return (
@@ -196,9 +188,84 @@ export default NavBar;
 //           style={{ zIndex: 2000 }}
 //         >
 //           <div className="container">
-//             <Link className="navbar-brand" to="/home">
-//             <img src={logo} alt="Logo" style={{ height: '40px'  }} /> {/* Logo ajusté */}
+//             {/* Logo */}
+//             <Link className="navbar-brand" to="/">
+//               {/* <div className="logo">
+//                 <span className="logo-highlight">Get</span><span className='bg-danger'>House</span> 
+//               </div> */}
+//              <div className="logo">
+//       <span className="logo-highlight animated-logo">Get</span>
+//       <span className="bg-danger animated-logo">House</span>
+
+//       {/* Add custom styles */}
+//       <style jsx>{`
+//         .logo {
+//           font-size: 2.5rem;
+//           font-weight: bold;
+//           display: inline-block;
+//           cursor: pointer;
+//         }
+//         .logo-highlight {
+//           color: #007bff; /* Blue color for "Get" */
+//         }
+//         .bg-danger {
+//           color: white; /* White text for "House" */
+//           padding: 0 5px;
+//           border-radius: 5px;
+//         }
+//         .animated-logo {
+//           display: inline-block;
+//           opacity: 0;
+//           animation: fadeIn 1.5s forwards;
+//         }
+//         .animated-logo:nth-child(1) {
+//           animation-delay: 0.5s;
+//         }
+//         .animated-logo:nth-child(2) {
+//           animation-delay: 1s;
+//         }
+//         @keyframes fadeIn {
+//           to {
+//             opacity: 1;
+//           }
+//         }
+//         .logo:hover .logo-highlight {
+//           color: #0056b3; /* Darker blue on hover */
+//           transition: color 0.3s ease;
+//         }
+//         .logo:hover .bg-danger {
+//           background-color: #dc3545; /* Brighter red on hover */
+//           transition: background-color 0.3s ease;
+//         }
+//       `}</style>
+//     </div>
+
+// <style jsx>{`
+//   .logo {
+//     display: inline-block;
+//     font-size: 24px;
+//     font-weight: bold;
+//     transition: transform 0.3s ease;
+//   }
+
+//   .logo:hover {
+//     transform: scale(1.1); /* Scale up by 10% on hover */
+//   }
+
+//   .logo-highlight {
+//     color: #007bff; /* Blue color for "Get" */
+//   }
+
+//   .logo-danger {
+//     color: white; /* White text for "House" */
+//     padding: 2px 5px;
+//     border-radius: 4px;
+//   }
+// `}</style>
+//               {/* <Logo/> */}
 //             </Link>
+
+//             {/* Navbar Toggler */}
 //             <button
 //               className="navbar-toggler"
 //               type="button"
@@ -211,16 +278,12 @@ export default NavBar;
 //               <i className="fas fa-bars"></i>
 //             </button>
 
+//             {/* Navbar Links */}
 //             <div className="collapse navbar-collapse" id="navbarNav">
 //               <ul className="navbar-nav me-auto">
 //                 <li className="nav-item">
-//                   <Link className="nav-link active" to="/home">
+//                   <Link className="nav-link active" to="/">
 //                     Home
-//                   </Link>
-//                 </li>
-//                 <li className="nav-item">
-//                   <Link className="nav-link active" to="/about">
-//                     About Us
 //                   </Link>
 //                 </li>
 //                 <li className="nav-item">
@@ -228,17 +291,38 @@ export default NavBar;
 //                     Properties
 //                   </Link>
 //                 </li>
-//                 <li className="nav-item">
-//                 <Link className="nav-link active" to="/contact">
-//                     Contact Us
+//                 <li className="nav-item dropdown">
+//                   <Link
+//                     className="nav-link dropdown-toggle"
+//                     to="#"
+//                     id="navbarDropdown"
+//                     role="button"
+//                     data-bs-toggle="dropdown"
+//                     aria-expanded="false"
+//                   >
+//                     More!
 //                   </Link>
-//                 </li>
-//                 <li className="nav-item">
-//                 <Link className="nav-link active" to="/privacy">
-//                     Privacy Policy
-//                   </Link>
+//                   <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+//                     <li>
+//                       <Link className="dropdown-item" to="/about">
+//                         About Us
+//                       </Link>
+//                     </li>
+//                     <li>
+//                       <Link className="dropdown-item" to="/contact">
+//                         Contact Us
+//                       </Link>
+//                     </li>
+//                     <li>
+//                       <Link className="dropdown-item" to="/privacy">
+//                         Privacy Policy
+//                       </Link>
+//                     </li>
+//                   </ul>
 //                 </li>
 //               </ul>
+
+//               {/* Search Form */}
 //               <form className="d-flex me-3">
 //                 <input
 //                   className="form-control me-2"
@@ -250,6 +334,8 @@ export default NavBar;
 //                   Search
 //                 </button>
 //               </form>
+
+//               {/* Login and Register Buttons */}
 //               <ul className="navbar-nav">
 //                 <li className="nav-item">
 //                   <Link className="nav-link" to="/login">
@@ -271,3 +357,4 @@ export default NavBar;
 // };
 
 // export default NavBar;
+
