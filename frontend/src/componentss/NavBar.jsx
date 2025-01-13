@@ -1,16 +1,11 @@
-
+// src/components/NavBar.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './NavBar.css'; // Custom CSS for the logo
 import { useAuth } from '../auth/AuthContext';
-// import { AuthContext } from '../auth/AuthProvider'; // Import the useAuth hook
 
 const NavBar = () => {
-  const {isAuthenticated, logout}=useAuth();
-  // const {}=AuthContext
-  // const {useAuth}=AuthContext();
-  // const { isAuthenticated, logout } = useAuth(); 
-  // Get authentication state and logout function
+  const { isAuthenticated, logout, user } = useAuth(); // Get authentication state, logout function, and user data
 
   return (
     <div>
@@ -141,24 +136,30 @@ const NavBar = () => {
 
               {/* Conditional Rendering Based on Authentication State */}
               <ul className="navbar-nav">
-             
-                      {isAuthenticated ? (
-                  // Show "Disconnect" button if authenticated
-                  <button onClick={logout} className="btn btn-danger">
-                    Disconnect
-                  </button>
+                {isAuthenticated ? (
+                  // Show user info and "Disconnect" button if authenticated
+                  <div className="d-flex align-items-center">
+                    <img
+                      src={user?.photoURL}
+                      alt="Profile"
+                      style={{ width: "40px", borderRadius: "50%", marginRight: "10px" }}
+                    />
+                    <span className="text-light me-3">{user?.displayName}</span>
+                    <button onClick={logout} className="btn btn-danger">
+                      Disconnect
+                    </button>
+                  </div>
                 ) : (
                   // Show "Login" and "Register" buttons if not authenticated
-                  <>
-                    <Link to="/login" className="btn btn-outline-primary">
+                  <div className="d-flex align-items-center">
+                    <Link to="/login" className="btn btn-outline-primary me-2">
                       Login
                     </Link>
                     <Link to="/register" className="btn btn-primary">
                       Register
                     </Link>
-                  </>
+                  </div>
                 )}
-                
               </ul>
             </div>
           </div>
