@@ -15,6 +15,7 @@ import RegisterPage from "./pages/RegisterPage";
 import ContactUsPage from "./pages/ContactPage";
 import PropertiesPage from "./pages/PropertiesPage";
 import PrivacyPolicyPage from "./pages/PrivacyPage";
+import RecoverPasswordPage from "./pages/views/RecoverPasswordPage";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
           
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} /> {/* Default route for "/" */}
+            <Route path="/recover-password" element={<RecoverPasswordPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/properties" element={<PropertiesPage />} />
             <Route path="/contact" element={<ContactUsPage />} />

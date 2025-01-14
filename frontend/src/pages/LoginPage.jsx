@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../auth/AuthContext'; // Import useAuth
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
 import { toast } from 'react-toastify'; // Import toast
 import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
 import GoogleSignIn from './GoogleSignIn';
@@ -144,9 +144,9 @@ const LoginPage = () => {
 
           {/* Forgotten Password Link */}
           <div className=" text-end">
-            <a href="/forgot-password" className="text-decoration-none text-primary">
+            <Link to="/recover-password" className="text-decoration-none text-primary">
               Forgot your password?
-            </a>
+            </Link>
           </div>
 
           {/* Submit Button */}
