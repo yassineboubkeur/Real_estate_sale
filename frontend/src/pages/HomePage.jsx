@@ -2,12 +2,14 @@
 import buildingImage from "../assets/images/image buildingblu.jpg";
 import buildingImage2 from "../assets/images/bg1.png";
 import buildingImage3 from "../assets/images/purple.png";
+import AutoCarouselWithCards from "./views/Carousel";
 
 // buildingImage3
 
 const HomePage = () => {
   return (
     <div>
+      
       {/* Banner */}
       <div
         id="intro"
@@ -44,7 +46,7 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-
+      <AutoCarouselWithCards/>
       {/* Search Section */}
       <section
         className="bg-light py-5"
@@ -186,37 +188,7 @@ const HomePage = () => {
       </section>
 
       {/* Advantages Section */}
-      <section className="bg-light py-5"
-        style={{
-            backgroundImage: `url(${buildingImage3})`,
-            // height: "100vh",
-            backgroundSize: "100% 100%",
-            backgroundPosition: "top",
-            backgroundRepeat: "no-repeat",
-            position: "relative",
-          }}
-      
-      >
-        <div className="container text-center">
-          <h2 className="mb-4">Why Choose Us?</h2>
-          <div className="row">
-            <div className="col-md-4">
-              <h5>Expert Guidance</h5>
-              <p>Get personalized advice from our experienced agents.</p>
-            </div>
-            <div className="col-md-4">
-              <h5>Wide Selection</h5>
-              <p>We offer a diverse range of properties to suit every need.</p>
-            </div>
-            <div className="col-md-4">
-              <h5>Quick Process</h5>
-              <p>
-                Our streamlined process ensures fast and efficient transactions.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+   
     </div>
   );
 };
