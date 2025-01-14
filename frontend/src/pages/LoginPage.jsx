@@ -1,9 +1,8 @@
-
-
-
 import React, { useState } from 'react';
 import { useAuth } from '../auth/AuthContext'; // Import useAuth
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
+import { toast } from 'react-toastify'; // Import toast
+import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
 import GoogleSignIn from './GoogleSignIn';
 
 const LoginPage = () => {
@@ -37,24 +36,71 @@ const LoginPage = () => {
       const data = await response.json();
 
       if (response.ok) {
-        alert("Login successful!");
+        toast.success("Login successful!", {
+          position: "bottom-right",
+          autoClose: 4000, // Close after 4 seconds
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          style: {
+            backgroundColor: "whitesmocke", // Green background color
+            color: "purple", // White text color
+            fontWeight:"bold"
+          },
+        }); // Toast for success
         login(); // Update authentication state
-        localStorage.setItem('user', JSON.stringify(data.user)); // Store user data
+        console.log(data);
+
+        // Save user data in localStorage
+        localStorage.setItem('userr', JSON.stringify({
+          id: data.user.id,
+          name: data.user.name,
+          email: data.user.email,
+          phone: data.user.phone,
+          address: data.user.address,
+          gender: data.user.gender,
+        }));
+
         navigate("/"); // Redirect to the home page
       } else {
-        alert(data.message || "An error occurred. Please try again.");
+        toast.error(data.message || "An error occurred. Please try again.", {
+          position: "bottom-right",
+          autoClose: 4000, // Close after 3 seconds
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          style: {
+            backgroundColor: "whitesmocke", // Green background color
+            color: "blue", // White text color
+            fontWeight:"bold"
+          },
+        }); // Toast for error
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Unable to connect to the server. Please try again later.");
+      toast.error("Unable to connect to the server. Please try again later.", {
+        position: "bottom-right",
+        autoClose: 4000, // Close after 3 seconds
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        style: {
+          backgroundColor: "whitesmocke", // Green background color
+          color: "blue", // White text color
+          fontWeight:"bold"
+        },
+      }); // Toast for error
     }
   };
 
   return (
     <div className="min-vh-100 d-flex align-items-center justify-content-center bg-light">
-      <div className="card shadow-lg p-4" style={{ width: "100%", maxWidth: "400px" }}>
+      <div className="card shadow-lg p-2" style={{ width: "100%", maxWidth: "320px" }}>
         {/* Welcome Section */}
-        <div className="text-center mb-4">
+        <div className="text-center ">
           <h2 className="h3 font-weight-bold">Welcome Back</h2>
           <p className="text-muted">
             Please log in to access your account.
@@ -63,7 +109,7 @@ const LoginPage = () => {
 
         {/* Login Form */}
         <form onSubmit={handleSubmit}>
-          <div className="mb-3">
+          <div className="">
             <label htmlFor="email" className="form-label">
               Email
             </label>
@@ -76,9 +122,10 @@ const LoginPage = () => {
               value={formData.email}
               onChange={handleChange}
               required
+              style={{ color: 'purple', fontWeight: 'bold' }} // Purple and bold text
             />
           </div>
-          <div className="mb-3">
+          <div className="">
             <label htmlFor="password" className="form-label">
               Password
             </label>
@@ -91,11 +138,12 @@ const LoginPage = () => {
               value={formData.password}
               onChange={handleChange}
               required
+              style={{ color: 'purple', fontWeight: 'bold' }} // Purple and bold text
             />
           </div>
 
           {/* Forgotten Password Link */}
-          <div className="mb-3 text-end">
+          <div className=" text-end">
             <a href="/forgot-password" className="text-decoration-none text-primary">
               Forgot your password?
             </a>
@@ -104,36 +152,21 @@ const LoginPage = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="btn btn-primary w-100 mb-3 rounded-pill"
-            style={{ padding: "10px", fontSize: "1.1rem" }}
+            className="btn btn-primary w-100  rounded-pill"
+            style={{ padding: "8px", fontSize: "1rem" }} // Smaller button
           >
             Login
           </button>
         </form>
 
         {/* Social Login Options */}
-        <div className="text-center mt-4">
-          <p className="text-muted mb-3">Or login with</p>
-          <div className="d-grid gap-2">
-            <button
-              className="btn btn-danger d-flex align-items-center justify-content-center rounded-pill"
-              style={{ padding: "10px", fontSize: "1.1rem" }}
-            >
-              <i className="bi bi-google me-2"></i>
-              <GoogleSignIn />
-            </button>
-            <button
-              className="btn btn-primary d-flex align-items-center justify-content-center rounded-pill"
-              style={{ padding: "10px", fontSize: "1.1rem" }}
-            >
-              <i className="bi bi-facebook me-2"></i>
-              Login with Facebook
-            </button>
-          </div>
+        <div className="text-center ">
+          <p className="text-muted ">Or login with</p>
+          
         </div>
 
         {/* Sign Up Link */}
-        <div className="text-center mt-4">
+        <div className="text-center ">
           <p className="text-muted">
             Don't have an account?{" "}
             <a href="/register" className="text-decoration-none text-primary">
@@ -143,11 +176,7 @@ const LoginPage = () => {
         </div>
 
         {/* Security Notice */}
-        <div className="text-center mt-4">
-          <p className="text-muted small">
-            Your data is securely stored. We respect your privacy.
-          </p>
-        </div>
+       
       </div>
     </div>
   );

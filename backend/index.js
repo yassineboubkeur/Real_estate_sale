@@ -2,7 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const admin = require('firebase-admin');
-const serviceAccount = require('path to your key');//important  *********************************** // Path to your Firebase service account key
+const serviceAccount = require('./realestate-bc6ed-firebase-adminsdk-k8ni4-3b658ac1de.json');//important  *********************************** // Path to your Firebase service account key
 const userRoutes = require('./routes/userRoutes.js'); // Import user routes
 
 // Initialize Firebase Admin SDK
