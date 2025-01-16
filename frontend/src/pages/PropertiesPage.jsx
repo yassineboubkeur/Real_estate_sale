@@ -26,21 +26,23 @@ const propertiesData = [
 
 // Reusable Property Card Component
 const PropertyCard = ({ property }) => (
-  <div className="col-md-4 mb-4" key={property.id}>
+  <div className="col-md-4 mb-3" key={property.id}> {/* Reduced margin-bottom */}
     <div className="card h-100 shadow-sm border-0">
       <img
         src={property.imageUrl}
         className="card-img-top"
         alt={`${property.title}`}
-        style={{ height: "200px", objectFit: "cover" }}
+        style={{ height: "150px", objectFit: "cover" }} // Reduced image height
       />
-      <div className="card-body">
-        <h5 className="card-title font-weight-bold">{property.title}</h5>
-        <p className="card-text text-muted">{property.description}</p>
-        <p className="card-text h5 text-primary font-weight-bold">
+      <div className="card-body p-2"> {/* Reduced padding */}
+        <h5 className="card-title font-weight-bold" style={{ fontSize: "1rem" }}> {/* Smaller font size */}
+          {property.title}
+        </h5>
+        <p className="card-text text-muted small">{property.description}</p> {/* Smaller text */}
+        <p className="card-text h6 text-primary font-weight-bold"> {/* Smaller font size */}
           {property.price}
         </p>
-        <button className="btn btn-primary btn-block" aria-label={`View details for ${property.title}`}>
+        <button className="btn btn-primary btn-sm btn-block" aria-label={`View details for ${property.title}`}> {/* Smaller button */}
           View Details
         </button>
       </div>
@@ -68,36 +70,36 @@ const PropertiesPage = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <h2 className="text-center mb-4 display-4 font-weight-bold">
+    <div className="container mt-3"> {/* Reduced margin-top */}
+      <h2 className="text-center mb-3 h3 font-weight-bold"> {/* Smaller font size */}
         Explore Our Properties
       </h2>
-      <p className="text-center text-muted mb-5">
+      <p className="text-center text-muted mb-3 small"> {/* Smaller text */}
         Discover your dream home from our curated collection of properties.
       </p>
 
       {/* Search Bar with Button */}
-      <div className="mb-5">
-                <div className="input-group" style={{ width: "300px" }}>
-            <input
-              type="text"
-              className="form-control form-control-lg border border-2 rounded-start focus:border-primary focus:shadow-sm transition"
-              placeholder="Search properties..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyPress={handleKeyPress}
-              aria-label="Search properties"
-              style={{ transition: "border-color 0.3s ease, box-shadow 0.3s ease" }}
-            />
-            <button
-              className="btn btn-primary btn-lg border border-2 rounded-end hover:bg-dark-primary transition"
-              type="button"
-              onClick={handleFilter}
-              style={{ transition: "background-color 0.3s ease" }}
-            >
-              Search
-            </button>
-                </div>
+      <div className="mb-3"> {/* Reduced margin-bottom */}
+        <div className="input-group" style={{ width: "250px" }}> {/* Smaller width */}
+          <input
+            type="text"
+            className="form-control form-control-sm border border-2 rounded-start focus:border-primary focus:shadow-sm transition" // Smaller input
+            placeholder="Search properties..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyPress={handleKeyPress}
+            aria-label="Search properties"
+            style={{ transition: "border-color 0.3s ease, box-shadow 0.3s ease" }}
+          />
+          <button
+            className="btn btn-primary btn-sm border border-2 rounded-end hover:bg-dark-primary transition" // Smaller button
+            type="button"
+            onClick={handleFilter}
+            style={{ transition: "background-color 0.3s ease" }}
+          >
+            Search
+          </button>
+        </div>
       </div>
 
       {/* Property Cards */}
@@ -107,19 +109,19 @@ const PropertiesPage = () => {
             <PropertyCard key={property.id} property={property} />
           ))
         ) : (
-          <p className="text-center text-muted w-100">
+          <p className="text-center text-muted w-100 small"> {/* Smaller text */}
             No properties match your search.
           </p>
         )}
       </div>
 
       {/* Call-to-Action Section */}
-      <div className="text-center mt-5">
-        <h3 className="h4 font-weight-bold">Can't Find What You're Looking For?</h3>
-        <p className="text-muted mb-4">
+      <div className="text-center mt-3"> {/* Reduced margin-top */}
+        <h3 className="h5 font-weight-bold">Can't Find What You're Looking For?</h3> {/* Smaller font size */}
+        <p className="text-muted mb-2 small"> {/* Smaller text */}
           Contact us for personalized assistance in finding your dream property.
         </p>
-        <a href="/contact" className="btn btn-outline-primary btn-lg">
+        <a href="/contact" className="btn btn-outline-primary btn-sm"> {/* Smaller button */}
           Contact Us
         </a>
       </div>

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -22,12 +21,12 @@ const RegisterPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
-  
+
     try {
       const response = await fetch("http://localhost:3000/api/users/register", {
         method: "POST",
@@ -43,13 +42,13 @@ const RegisterPage = () => {
           gender: formData.gender,
         }),
       });
-  
+
       const data = await response.json();
-  
+
       if (response.ok) {
         alert("User registered successfully!");
-        console.log(data); 
-        
+        console.log(data);
+
         // Redirect to the login page
         navigate("/login");
       } else {
@@ -62,12 +61,12 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="min-vh-100 d-flex align-items-center justify-content-center bg-light py-5">
-      <div className="card shadow-lg p-4" style={{ width: "100%", maxWidth: "800px" }}>
+    <div className="min-vh-100 d-flex align-items-center justify-content-center bg-light py-2">
+      <div className="card shadow-lg p-2" style={{ width: "100%", maxWidth: "500px" }}>
         {/* Welcome Section */}
-        <div className="text-center mb-4">
-          <h2 className="h3 font-weight-bold">Create Your Account</h2>
-          <p className="text-muted">
+        <div className="text-center mb-2">
+          <h2 className="h5 font-weight-bold">Create Your Account</h2>
+          <p className="text-muted small mb-1">
             Join us today! Fill out the form to get started.
           </p>
         </div>
@@ -78,8 +77,8 @@ const RegisterPage = () => {
             {/* Left Column */}
             <div className="col-md-6">
               {/* Name Field */}
-              <div className="mb-3">
-                <label htmlFor="name" className="form-label">
+              <div className="mb-1">
+                <label htmlFor="name" className="form-label small">
                   Name
                 </label>
                 <input
@@ -91,12 +90,13 @@ const RegisterPage = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
+                  style={{ fontSize: "0.8rem", padding: "4px" }}
                 />
               </div>
 
               {/* Email Field */}
-              <div className="mb-3">
-                <label htmlFor="email" className="form-label">
+              <div className="mb-1">
+                <label htmlFor="email" className="form-label small">
                   Email
                 </label>
                 <input
@@ -108,12 +108,13 @@ const RegisterPage = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
+                  style={{ fontSize: "0.8rem", padding: "4px" }}
                 />
               </div>
 
               {/* Password Field */}
-              <div className="mb-3">
-                <label htmlFor="password" className="form-label">
+              <div className="mb-1">
+                <label htmlFor="password" className="form-label small">
                   Password
                 </label>
                 <input
@@ -125,12 +126,13 @@ const RegisterPage = () => {
                   value={formData.password}
                   onChange={handleChange}
                   required
+                  style={{ fontSize: "0.8rem", padding: "4px" }}
                 />
               </div>
 
               {/* Confirm Password Field */}
-              <div className="mb-3">
-                <label htmlFor="confirmPassword" className="form-label">
+              <div className="mb-1">
+                <label htmlFor="confirmPassword" className="form-label small">
                   Confirm Password
                 </label>
                 <input
@@ -142,6 +144,7 @@ const RegisterPage = () => {
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   required
+                  style={{ fontSize: "0.8rem", padding: "4px" }}
                 />
               </div>
             </div>
@@ -149,8 +152,8 @@ const RegisterPage = () => {
             {/* Right Column */}
             <div className="col-md-6">
               {/* Phone Field */}
-              <div className="mb-3">
-                <label htmlFor="phone" className="form-label">
+              <div className="mb-1">
+                <label htmlFor="phone" className="form-label small">
                   Phone
                 </label>
                 <input
@@ -162,12 +165,13 @@ const RegisterPage = () => {
                   value={formData.phone}
                   onChange={handleChange}
                   required
+                  style={{ fontSize: "0.8rem", padding: "4px" }}
                 />
               </div>
 
               {/* Address Field */}
-              <div className="mb-3">
-                <label htmlFor="address" className="form-label">
+              <div className="mb-1">
+                <label htmlFor="address" className="form-label small">
                   Address
                 </label>
                 <textarea
@@ -178,12 +182,13 @@ const RegisterPage = () => {
                   value={formData.address}
                   onChange={handleChange}
                   required
+                  style={{ fontSize: "0.8rem", padding: "4px" }}
                 ></textarea>
               </div>
 
               {/* Gender Field */}
-              <div className="mb-3">
-                <label className="form-label">Gender</label>
+              <div className="mb-1">
+                <label className="form-label small">Gender</label>
                 <div>
                   <div className="form-check form-check-inline">
                     <input
@@ -195,7 +200,7 @@ const RegisterPage = () => {
                       onChange={handleChange}
                       required
                     />
-                    <label className="form-check-label" htmlFor="genderMale">
+                    <label className="form-check-label small" htmlFor="genderMale">
                       Male
                     </label>
                   </div>
@@ -209,7 +214,7 @@ const RegisterPage = () => {
                       onChange={handleChange}
                       required
                     />
-                    <label className="form-check-label" htmlFor="genderFemale">
+                    <label className="form-check-label small" htmlFor="genderFemale">
                       Female
                     </label>
                   </div>
@@ -219,38 +224,22 @@ const RegisterPage = () => {
           </div>
 
           {/* Submit Button */}
-          <button type="submit" className="btn btn-primary w-100 mb-3">
+          <button
+            type="submit"
+            className="btn btn-primary w-100 mb-1"
+            style={{ fontSize: "0.8rem", padding: "4px" }}
+          >
             Register
           </button>
         </form>
 
-        {/* Social Login Options */}
-        <div className="text-center mt-4">
-          <p className="text-muted mb-3">Or register with</p>
-          <div className="d-grid gap-2">
-            <button className="btn btn-danger">
-              <i className="bi bi-google me-2"></i>Register with Google
-            </button>
-            <button className="btn btn-primary">
-              <i className="bi bi-facebook me-2"></i>Register with Facebook
-            </button>
-          </div>
-        </div>
-
         {/* Login Link */}
-        <div className="text-center mt-4">
-          <p className="text-muted">
+        <div className="text-center mt-2">
+          <p className="text-muted small mb-0">
             Already have an account?{" "}
             <a href="/login" className="text-decoration-none">
               Sign in here
             </a>
-          </p>
-        </div>
-
-        {/* Security Notice */}
-        <div className="text-center mt-4">
-          <p className="text-muted small">
-            Your data is securely stored. We respect your privacy.
           </p>
         </div>
       </div>
@@ -259,6 +248,3 @@ const RegisterPage = () => {
 };
 
 export default RegisterPage;
-
-
-
