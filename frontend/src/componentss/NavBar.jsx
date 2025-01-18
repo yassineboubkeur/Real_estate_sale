@@ -20,8 +20,8 @@ const NavBar = () => {
             zIndex: 2000,
             position: 'sticky', // Make navbar sticky
             top: 0, // Stick to the top of the viewport
-            padding: "0.5rem 0", // Reduced padding for smaller navbar
-            height: "50px", // Set a smaller fixed height for the navbar
+            padding: "1rem 0", // Increased padding for larger navbar
+            height: "80px", // Set a larger fixed height for the navbar
           }}
         >
           <div className="container">
@@ -33,7 +33,7 @@ const NavBar = () => {
               </div>
               <style jsx>{`
                 .logo {
-                  font-size: 1rem; /* Smaller font size */
+                  font-size: 1.5rem; /* Larger font size */
                   font-weight: bold;
                   display: inline-block;
                   cursor: pointer;
@@ -43,8 +43,8 @@ const NavBar = () => {
                 }
                 .bg-danger {
                   color: white; /* White text for "House" */
-                  padding: 0 1px; /* Reduced padding */
-                  border-radius: 1px; /* Reduced border radius */
+                  padding: 0 3px; /* Increased padding */
+                  border-radius: 3px; /* Increased border radius */
                 }
                 .animated-logo {
                   display: inline-block;
@@ -75,7 +75,7 @@ const NavBar = () => {
 
             {/* Navbar Toggler */}
             <button
-              className="navbar-toggler p-0" // Reduced padding
+              className="navbar-toggler p-1" // Increased padding
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#navbarNav"
@@ -83,7 +83,7 @@ const NavBar = () => {
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              <i className="fas fa-bars" style={{ fontSize: '0.8rem' }}></i> {/* Smaller icon */}
+              <i className="fas fa-bars" style={{ fontSize: '1.2rem' }}></i> {/* Larger icon */}
             </button>
 
             {/* Navbar Links */}
@@ -91,10 +91,10 @@ const NavBar = () => {
               <ul className="navbar-nav me-auto">
                 <li className="nav-item">
                   <Link
-                    className={`nav-link p-0 ${location.pathname === '/' ? 'active' : ''}`} // Reduced padding
+                    className={`nav-link p-1 ${location.pathname === '/' ? 'active' : ''}`} // Increased padding
                     to="/"
                     style={{
-                      fontSize: '0.8rem', // Smaller font size
+                      fontSize: '1rem', // Larger font size
                       fontWeight: location.pathname === '/' ? 'bold' : 'normal', // Bold if active
                       borderBottom: location.pathname === '/' ? '2px solid #007bff' : 'none', // Bottom border if active
                     }}
@@ -104,10 +104,10 @@ const NavBar = () => {
                 </li>
                 <li className="nav-item">
                   <Link
-                    className={`nav-link p-0 ${location.pathname === '/properties' ? 'active' : ''}`} // Reduced padding
+                    className={`nav-link p-1 ${location.pathname === '/properties' ? 'active' : ''}`} // Increased padding
                     to="/properties"
                     style={{
-                      fontSize: '0.8rem', // Smaller font size
+                      fontSize: '1rem', // Larger font size
                       fontWeight: location.pathname === '/properties' ? 'bold' : 'normal', // Bold if active
                       borderBottom: location.pathname === '/properties' ? '2px solid #007bff' : 'none', // Bottom border if active
                     }}
@@ -117,29 +117,29 @@ const NavBar = () => {
                 </li>
                 <li className="nav-item dropdown">
                   <Link
-                    className="nav-link dropdown-toggle p-0" // Reduced padding
+                    className="nav-link dropdown-toggle p-1" // Increased padding
                     to="#"
                     id="navbarDropdown"
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
-                    style={{ fontSize: '0.8rem' }} // Smaller font size
+                    style={{ fontSize: '1rem' }} // Larger font size
                   >
                     More!
                   </Link>
                   <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li>
-                      <Link className="dropdown-item" to="/about" style={{ fontSize: '0.8rem' }}>
+                      <Link className="dropdown-item" to="/about" style={{ fontSize: '1rem' }}>
                         About Us
                       </Link>
                     </li>
                     <li>
-                      <Link className="dropdown-item" to="/contact" style={{ fontSize: '0.8rem' }}>
+                      <Link className="dropdown-item" to="/contact" style={{ fontSize: '1rem' }}>
                         Contact Us
                       </Link>
                     </li>
                     <li>
-                      <Link className="dropdown-item" to="/privacy" style={{ fontSize: '0.8rem' }}>
+                      <Link className="dropdown-item" to="/privacy" style={{ fontSize: '1rem' }}>
                         Privacy Policy
                       </Link>
                     </li>
@@ -148,18 +148,18 @@ const NavBar = () => {
               </ul>
 
               {/* Search Form */}
-              <form className="d-flex me-1"> {/* Reduced margin */}
+              <form className="d-flex me-2"> {/* Increased margin */}
                 <input
-                  className="form-control me-1 p-0 border-0" // Reduced padding
+                  className="form-control me-2 p-1 border-0" // Increased padding
                   type="search"
                   placeholder="Search"
                   aria-label="Search"
-                  style={{ fontSize: '0.8rem', backgroundColor: 'transparent', color: '#fff' }} // Smaller font size
+                  style={{ fontSize: '1rem', backgroundColor: 'transparent', color: '#fff' }} // Larger font size
                 />
                 <button
-                  className="btn btn-outline-light p-0 border-0" // Reduced padding
+                  className="btn btn-outline-light p-1 border-0" // Increased padding
                   type="submit"
-                  style={{ fontSize: '0.8rem' }} // Smaller font size
+                  style={{ fontSize: '1rem' }} // Larger font size
                 >
                   Search
                 </button>
@@ -176,7 +176,7 @@ const NavBar = () => {
                         className="dropdown-toggle"
                         src="images/profile (2).png"
                         alt="profile"
-                        style={{ width: '2rem', cursor: 'pointer' }}
+                        style={{ width: '3rem', cursor: 'pointer' }} // Larger profile image
                         id="profileDropdown"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
@@ -226,15 +226,15 @@ const NavBar = () => {
                   <div className="d-flex align-items-center">
                     <Link
                       to="/login"
-                      className="btn btn-outline-primary me-1 p-0 border-0" // Reduced padding and margin
-                      style={{ fontSize: '0.8rem' }} // Smaller font size
+                      className="btn btn-outline-primary me-2 p-1 border-0" // Increased padding and margin
+                      style={{ fontSize: '1rem' }} // Larger font size
                     >
                       Login
                     </Link>
                     <Link
                       to="/register"
-                      className="btn btn-primary p-0 border-0" // Reduced padding
-                      style={{ fontSize: '0.8rem' }} // Smaller font size
+                      className="btn btn-primary p-1 border-0" // Increased padding
+                      style={{ fontSize: '1rem' }} // Larger font size
                     >
                       Register
                     </Link>

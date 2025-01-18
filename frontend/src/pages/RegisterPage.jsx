@@ -61,12 +61,12 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="min-vh-100 d-flex align-items-center justify-content-center bg-light py-2">
-      <div className="card shadow-lg p-2" style={{ width: "100%", maxWidth: "500px" }}>
+    <div className="min-vh-100 d-flex align-items-center justify-content-center bg-light py-3">
+      <div className="card shadow-lg p-3" style={{ width: "100%", maxWidth: "600px" }}>
         {/* Welcome Section */}
-        <div className="text-center mb-2">
-          <h2 className="h5 font-weight-bold">Create Your Account</h2>
-          <p className="text-muted small mb-1">
+        <div className="text-center mb-3">
+          <h2 className="h4 font-weight-bold">Create Your Account</h2>
+          <p className="text-muted small">
             Join us today! Fill out the form to get started.
           </p>
         </div>
@@ -77,7 +77,7 @@ const RegisterPage = () => {
             {/* Left Column */}
             <div className="col-md-6">
               {/* Name Field */}
-              <div className="mb-1">
+              <div className="mb-2">
                 <label htmlFor="name" className="form-label small">
                   Name
                 </label>
@@ -90,12 +90,12 @@ const RegisterPage = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  style={{ fontSize: "0.8rem", padding: "4px" }}
+                  style={{ fontSize: "0.9rem" }}
                 />
               </div>
 
               {/* Email Field */}
-              <div className="mb-1">
+              <div className="mb-2">
                 <label htmlFor="email" className="form-label small">
                   Email
                 </label>
@@ -108,12 +108,12 @@ const RegisterPage = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  style={{ fontSize: "0.8rem", padding: "4px" }}
+                  style={{ fontSize: "0.9rem" }}
                 />
               </div>
 
               {/* Password Field */}
-              <div className="mb-1">
+              <div className="mb-2">
                 <label htmlFor="password" className="form-label small">
                   Password
                 </label>
@@ -126,12 +126,12 @@ const RegisterPage = () => {
                   value={formData.password}
                   onChange={handleChange}
                   required
-                  style={{ fontSize: "0.8rem", padding: "4px" }}
+                  style={{ fontSize: "0.9rem" }}
                 />
               </div>
 
               {/* Confirm Password Field */}
-              <div className="mb-1">
+              <div className="mb-2">
                 <label htmlFor="confirmPassword" className="form-label small">
                   Confirm Password
                 </label>
@@ -144,7 +144,7 @@ const RegisterPage = () => {
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   required
-                  style={{ fontSize: "0.8rem", padding: "4px" }}
+                  style={{ fontSize: "0.9rem" }}
                 />
               </div>
             </div>
@@ -152,7 +152,7 @@ const RegisterPage = () => {
             {/* Right Column */}
             <div className="col-md-6">
               {/* Phone Field */}
-              <div className="mb-1">
+              <div className="mb-2">
                 <label htmlFor="phone" className="form-label small">
                   Phone
                 </label>
@@ -165,12 +165,12 @@ const RegisterPage = () => {
                   value={formData.phone}
                   onChange={handleChange}
                   required
-                  style={{ fontSize: "0.8rem", padding: "4px" }}
+                  style={{ fontSize: "0.9rem" }}
                 />
               </div>
 
               {/* Address Field */}
-              <div className="mb-1">
+              <div className="mb-2">
                 <label htmlFor="address" className="form-label small">
                   Address
                 </label>
@@ -182,12 +182,12 @@ const RegisterPage = () => {
                   value={formData.address}
                   onChange={handleChange}
                   required
-                  style={{ fontSize: "0.8rem", padding: "4px" }}
+                  style={{ fontSize: "0.9rem" }}
                 ></textarea>
               </div>
 
               {/* Gender Field */}
-              <div className="mb-1">
+              <div className="mb-2">
                 <label className="form-label small">Gender</label>
                 <div>
                   <div className="form-check form-check-inline">
@@ -226,22 +226,31 @@ const RegisterPage = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="btn btn-primary w-100 mb-1"
-            style={{ fontSize: "0.8rem", padding: "4px" }}
+            className="btn btn-primary w-100 mb-2"
+            style={{ fontSize: "0.9rem", padding: "6px" }}
           >
             Register
           </button>
         </form>
 
+        {/* Social Login Options */}
+        <div className="text-center mt-3">
+          <p className="text-muted small mb-2">Or register with</p>
+     
+        </div>
+
         {/* Login Link */}
-        <div className="text-center mt-2">
-          <p className="text-muted small mb-0">
+        <div className="text-center mt-3">
+          <p className="text-muted small">
             Already have an account?{" "}
             <a href="/login" className="text-decoration-none">
               Sign in here
             </a>
           </p>
         </div>
+
+        {/* Security Notice */}
+       
       </div>
     </div>
   );

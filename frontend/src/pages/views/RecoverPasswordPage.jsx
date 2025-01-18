@@ -38,7 +38,9 @@ const RecoverPasswordPage = () => {
             fontWeight: "bold",
           },
         });
-        navigate("/login"); // Redirect to login page after successful submission
+
+        
+        navigate("/check-email");
       } else {
         toast.error(data.message || "An error occurred. Please try again.", {
           position: "bottom-right",
