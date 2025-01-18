@@ -4,6 +4,7 @@ const cors = require('cors');
 const admin = require('firebase-admin');
 const serviceAccount = require('./config/firebase-key.json');//important  *********************************** // Path to your Firebase service account key
 const userRoutes = require('./routes/userRoutes.js'); // Import user routes
+const propertyRoutes = require('./routes/propertyRoutes.js');  
 
 // Initialize Firebase Admin SDK
 admin.initializeApp({
@@ -27,6 +28,8 @@ app.use(express.json());
 
 // Use user routes
 app.use('/api/users', userRoutes);
+// Use property routes
+app.use('/api/properties', propertyRoutes);
 
 // Firebase token verification endpoint
 app.post('/verifyToken', async (req, res) => {
