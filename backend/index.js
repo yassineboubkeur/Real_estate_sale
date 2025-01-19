@@ -4,6 +4,7 @@ const cors = require('cors');
 const admin = require('firebase-admin');
 const serviceAccount = require('./config/firebase-key.json');//important  *********************************** // Path to your Firebase service account key
 const userRoutes = require('./routes/userRoutes.js'); // Import user routes
+const propertyRoutes = require('./routes/propertyRoutes.js');  
 
 // Initialize Firebase Admin SDK
 admin.initializeApp({
@@ -27,6 +28,8 @@ app.use(express.json());
 
 // Use user routes
 app.use('/api/users', userRoutes);
+// Use property routes
+app.use('/api/properties', propertyRoutes);
 
 // Firebase token verification endpoint
 app.post('/verifyToken', async (req, res) => {
@@ -47,27 +50,3 @@ app.listen(PORT, () => {
 });
 
 
-// const express = require('express');
-// const cors = require('cors');
-// const userRoutes = require('./routes/userRoutes.js'); // Importez les routes utilisateur
-
-// const app = express();
-
-// // Configurer CORS
-// app.use(cors({
-//   origin: 'http://localhost:5173',
-//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//   allowedHeaders: ['Content-Type'],
-// }));
-
-// // Middleware pour parser les données JSON
-// app.use(express.json());
-
-// // Utiliser les routes utilisateur
-// app.use('/api/users', userRoutes);
-
-// // Démarrer le serveur
-// const PORT = 3000;
-// app.listen(PORT, () => {
-//   console.log(`Server running on http://localhost:${PORT}`);
-// });
