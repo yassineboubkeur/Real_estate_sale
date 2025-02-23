@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 18 jan. 2025 à 15:05
+-- Généré le : dim. 16 fév. 2025 à 19:32
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -35,15 +35,9 @@ CREATE TABLE `properties` (
   `location` varchar(255) NOT NULL,
   `size` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `user_id` int(11) DEFAULT NULL
+  `user_id` int(11) DEFAULT NULL,
+  `picture` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Déchargement des données de la table `properties`
---
-
-INSERT INTO `properties` (`id`, `title`, `description`, `price`, `location`, `size`, `created_at`, `user_id`) VALUES
-(2, 'Appartement à vendre', 'Bel appartement avec vue sur la mer.', 300000.00, 'Casablanca, Maroc', 120, '2025-01-18 13:51:55', 2);
 
 -- --------------------------------------------------------
 
@@ -94,7 +88,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `properties`
 --
 ALTER TABLE `properties`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `users`

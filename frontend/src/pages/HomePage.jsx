@@ -1,6 +1,7 @@
 import buildingImage from "../assets/images/image buildingblu.jpg";
 import buildingImage2 from "../assets/images/bg1.png";
 import AutoCarouselWithCards from "./views/Carousel";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
@@ -36,6 +37,9 @@ const HomePage = () => {
               <a className="btn btn-outline-light btn-sm" href="#properties" style={{ fontSize: "0.9rem" }}> {/* Smaller button */}
                 View Properties
               </a>
+              <Link className="btn btn-outline-light btn-sm ml-2" to="/add-property" style={{ fontSize: "0.9rem" }}> {/* Smaller button */}
+                Add new property
+              </Link>
             </div>
           </div>
         </div>

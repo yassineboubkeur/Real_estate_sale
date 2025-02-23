@@ -1,5 +1,3 @@
-
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -18,31 +16,41 @@ import PrivacyPolicyPage from "./pages/PrivacyPage";
 import RecoverPasswordPage from "./pages/views/RecoverPasswordPage";
 import ResetPasswordPage from "./pages/views/ResetPasswordPage";
 import CheckEmailPage from "./pages/views/CheckEmailPage";
+import PropertyForm from "./pages/PropertyForm/PropertyForm";
 
 const App = () => {
   return (
     <div>
-       <Router>
+      <Router>
         <Routes>
-          
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} /> {/* Default route for "/" */}
             <Route path="/recover-password" element={<RecoverPasswordPage />} />
             <Route path="/check-email" element={<CheckEmailPage />} />
-            <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
+            <Route
+              path="/reset-password/:token"
+              element={<ResetPasswordPage />}
+            />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/properties" element={<PropertiesPage />} />
             <Route path="/contact" element={<ContactUsPage />} />
-            <Route path="/register" element={<RegisterPage/>} />
+            <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/privacy" element={<PrivacyPolicyPage />} />
+
+            <Route
+              path="/add-property"
+              element={<PropertyForm isEditMode={false} />}
+            />
+            <Route
+              path="/edit-property/:id"
+              element={<PropertyForm isEditMode={true} />}
+            />
           </Route>
         </Routes>
-    </Router>
+      </Router>
     </div>
   );
 };
 
 export default App;
-
-

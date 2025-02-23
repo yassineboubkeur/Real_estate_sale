@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useAuth } from '../auth/AuthContext'; // Import useAuth
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
-import { toast } from 'react-toastify'; // Import toast
-import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
+import { useAuth } from '../auth/AuthContext'; 
+import { Link, useNavigate } from 'react-router-dom'; 
+import { toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 import GoogleSignIn from './GoogleSignIn';
 
 const LoginPage = () => {
@@ -11,8 +11,8 @@ const LoginPage = () => {
     password: "",
   });
 
-  const { login } = useAuth(); // Get the login function from AuthContext
-  const navigate = useNavigate(); // Initialize useNavigate
+  const { login } = useAuth(); 
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
