@@ -17,6 +17,7 @@ import RecoverPasswordPage from "./pages/views/RecoverPasswordPage";
 import ResetPasswordPage from "./pages/views/ResetPasswordPage";
 import CheckEmailPage from "./pages/views/CheckEmailPage";
 import PropertyForm from "./pages/PropertyForm/PropertyForm";
+import PropertyDetails from "./pages/PropertyDetails";
 
 const App = () => {
   return (
@@ -25,6 +26,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} /> {/* Default route for "/" */}
+            <Route path="/property-details/:id" element={<PropertyDetails />} />
+
             <Route path="/recover-password" element={<RecoverPasswordPage />} />
             <Route path="/check-email" element={<CheckEmailPage />} />
             <Route

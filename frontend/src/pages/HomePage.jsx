@@ -1,9 +1,38 @@
-import buildingImage from "../assets/images/image buildingblu.jpg";
-import buildingImage2 from "../assets/images/bg1.png";
-import AutoCarouselWithCards from "./views/Carousel";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import buildingImage from "../assets/images/image buildingblu.jpg";
+import AutoCarouselWithCards from "./views/Carousel";
 
 const HomePage = () => {
+  const [recentProperties, setRecentProperties] = useState([]);
+
+  // Fetch recently added properties from the backend
+  useEffect(() => {
+    const fetchRecentProperties = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/properties/recent",
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch recent properties");
+        }
+
+        const data = await response.json();
+        setRecentProperties(data.properties); // Set the fetched properties
+      } catch (error) {
+        console.error("Error fetching recent properties:", error);
+      }
+    };
+
+    fetchRecentProperties();
+  }, []);
+
   return (
     <div>
       {/* Banner */}
@@ -11,7 +40,7 @@ const HomePage = () => {
         id="intro"
         className="bg-image shadow-2-strong"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${buildingImage})`, // Gradient overlay
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${buildingImage})`,
           height: "50vh",
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -27,17 +56,37 @@ const HomePage = () => {
           }}
         >
           <div className="container">
-            <h1 className="mb-1 display-5 fw-bold" style={{ fontSize: "2rem", textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" }}> {/* Text shadow for better readability */}
+            <h1
+              className="mb-1 display-5 fw-bold"
+              style={{
+                fontSize: "2rem",
+                textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+              }}
+            >
               Real Estate Sale
             </h1>
-            <p className="mb-2 lead" style={{ fontSize: "0.9rem", textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)" }}> {/* Text shadow for better readability */}
+            <p
+              className="mb-2 lead"
+              style={{
+                fontSize: "0.9rem",
+                textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)",
+              }}
+            >
               Discover the best properties for sale
             </p>
             <div>
-              <a className="btn btn-outline-light btn-sm" href="#properties" style={{ fontSize: "0.9rem" }}> {/* Smaller button */}
+              <a
+                className="btn btn-outline-light btn-sm"
+                href="#properties"
+                style={{ fontSize: "0.9rem" }}
+              >
                 View Properties
               </a>
-              <Link className="btn btn-outline-light btn-sm ml-2" to="/add-property" style={{ fontSize: "0.9rem" }}> {/* Smaller button */}
+              <Link
+                className="btn btn-outline-light btn-sm ml-2"
+                to="/add-property"
+                style={{ fontSize: "0.9rem" }}
+              >
                 Add new property
               </Link>
             </div>
@@ -49,16 +98,20 @@ const HomePage = () => {
       <AutoCarouselWithCards />
 
       {/* Search Section */}
-      <section className="py-3" style={{ backgroundColor: "#f8f9fa" }}> {/* Light background */}
+      <section className="py-3" style={{ backgroundColor: "#f8f9fa" }}>
         <div
           className="container p-3 text-center"
           style={{
-            background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(245, 245, 245, 0.95))", // Subtle gradient
+            background:
+              "linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(245, 245, 245, 0.95))",
             borderRadius: "10px",
-            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)", // Subtle shadow
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
           }}
         >
-          <h2 className="mb-3 fw-bold" style={{ fontSize: "1.5rem", color: "#343a40" }}> {/* Darker text for contrast */}
+          <h2
+            className="mb-3 fw-bold"
+            style={{ fontSize: "1.5rem", color: "#343a40" }}
+          >
             Find Your Dream Property
           </h2>
           <div className="row">
@@ -67,13 +120,13 @@ const HomePage = () => {
                 type="text"
                 className="form-control form-control-sm"
                 placeholder="Location"
-                style={{ border: "1px solid #ced4da", borderRadius: "5px" }} // Styled input
+                style={{ border: "1px solid #ced4da", borderRadius: "5px" }}
               />
             </div>
             <div className="col-md-4 mb-2">
               <select
                 className="form-control form-control-sm"
-                style={{ border: "1px solid #ced4da", borderRadius: "5px" }} // Styled select
+                style={{ border: "1px solid #ced4da", borderRadius: "5px" }}
               >
                 <option>All Property Types</option>
                 <option>House</option>
@@ -86,11 +139,14 @@ const HomePage = () => {
                 type="number"
                 className="form-control form-control-sm"
                 placeholder="Max Price"
-                style={{ border: "1px solid #ced4da", borderRadius: "5px" }} // Styled input
+                style={{ border: "1px solid #ced4da", borderRadius: "5px" }}
               />
             </div>
           </div>
-          <button className="btn btn-primary btn-sm" style={{ fontSize: "0.9rem" }}> {/* Smaller button */}
+          <button
+            className="btn btn-primary btn-sm"
+            style={{ fontSize: "0.9rem" }}
+          >
             Search
           </button>
         </div>
@@ -101,81 +157,57 @@ const HomePage = () => {
         id="recently-added"
         className="container p-3 my-3"
         style={{
-          background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(245, 245, 245, 0.95))", // Subtle gradient
+          background:
+            "linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(245, 245, 245, 0.95))",
           borderRadius: "10px",
-          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)", // Subtle shadow
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <h2 className="text-center fw-bold mb-3" style={{ fontSize: "1.5rem", color: "#343a40" }}> {/* Darker text for contrast */}
+        <h2
+          className="text-center fw-bold mb-3"
+          style={{ fontSize: "1.5rem", color: "#343a40" }}
+        >
           Recently Added Properties
         </h2>
         <div className="row">
-          <div className="col-md-4 mb-3">
-            <div className="card h-100 shadow-sm border-0">
-              <img
-                src="https://via.placeholder.com/300x200"
-                className="card-img-top"
-                alt="Property 1"
-                style={{ height: "150px", objectFit: "cover" }} // Reduced image height
-              />
-              <div className="card-body p-2">
-                <h5 className="card-title font-weight-bold" style={{ fontSize: "1rem", color: "#343a40" }}> {/* Darker text for contrast */}
-                  Cozy Apartment in the City
-                </h5>
-                <p className="card-text text-muted small">2 Bedrooms, 2 Bathrooms, 1000 sqft</p> {/* Smaller text */}
-                <p className="card-text h6 text-primary font-weight-bold"> {/* Smaller font size */}
-                  $350,000
-                </p>
-                <button className="btn btn-primary btn-sm btn-block"> {/* Smaller button */}
-                  View Details
-                </button>
+          {recentProperties.length > 0 ? (
+            recentProperties.map((property) => (
+              <div className="col-md-4 mb-3" key={property.id}>
+                <div className="card h-100 shadow-sm border-0">
+                  <img
+                    src={`http://localhost:3000/uploads/${property.picture}`}
+                    className="card-img-top"
+                    alt={property.title}
+                    style={{ height: "150px", objectFit: "cover" }}
+                  />
+                  <div className="card-body p-2">
+                    <h5
+                      className="card-title font-weight-bold"
+                      style={{ fontSize: "1rem", color: "#343a40" }}
+                    >
+                      {property.title}
+                    </h5>
+                    <p className="card-text text-muted small">
+                      {property.description}
+                    </p>
+                    <p className="card-text h6 text-primary font-weight-bold">
+                      ${property.price}
+                    </p>
+                    <Link
+                      to={`/property-details/${property.id}`}
+                      className="btn btn-primary btn-sm btn-block"
+                    >
+                      View Details
+                    </Link>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div className="col-md-4 mb-3">
-            <div className="card h-100 shadow-sm border-0">
-              <img
-                src="https://via.placeholder.com/300x200"
-                className="card-img-top"
-                alt="Property 2"
-                style={{ height: "150px", objectFit: "cover" }} // Reduced image height
-              />
-              <div className="card-body p-2">
-                <h5 className="card-title font-weight-bold" style={{ fontSize: "1rem", color: "#343a40" }}> {/* Darker text for contrast */}
-                  Spacious Family Home
-                </h5>
-                <p className="card-text text-muted small">3 Bedrooms, 2 Bathrooms, 2000 sqft</p> {/* Smaller text */}
-                <p className="card-text h6 text-primary font-weight-bold"> {/* Smaller font size */}
-                  $550,000
-                </p>
-                <button className="btn btn-primary btn-sm btn-block"> {/* Smaller button */}
-                  View Details
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4 mb-3">
-            <div className="card h-100 shadow-sm border-0">
-              <img
-                src="https://via.placeholder.com/300x200"
-                className="card-img-top"
-                alt="Property 3"
-                style={{ height: "150px", objectFit: "cover" }} // Reduced image height
-              />
-              <div className="card-body p-2">
-                <h5 className="card-title font-weight-bold" style={{ fontSize: "1rem", color: "#343a40" }}> {/* Darker text for contrast */}
-                  Luxury Waterfront Villa
-                </h5>
-                <p className="card-text text-muted small">5 Bedrooms, 6 Bathrooms, 5000 sqft</p> {/* Smaller text */}
-                <p className="card-text h6 text-primary font-weight-bold"> {/* Smaller font size */}
-                  $2,000,000
-                </p>
-                <button className="btn btn-primary btn-sm btn-block"> {/* Smaller button */}
-                  View Details
-                </button>
-              </div>
-            </div>
-          </div>
+            ))
+          ) : (
+            <p className="text-center text-muted w-100 small">
+              No recently added properties.
+            </p>
+          )}
         </div>
       </section>
 
@@ -183,16 +215,26 @@ const HomePage = () => {
       <section
         className="container p-3 my-3"
         style={{
-          background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(245, 245, 245, 0.95))", // Subtle gradient
+          background:
+            "linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(245, 245, 245, 0.95))",
           borderRadius: "10px",
-          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)", // Subtle shadow
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <h2 className="text-center fw-bold mb-3" style={{ fontSize: "1.5rem", color: "#343a40" }}> {/* Darker text for contrast */}
+        <h2
+          className="text-center fw-bold mb-3"
+          style={{ fontSize: "1.5rem", color: "#343a40" }}
+        >
           Explore Properties on the Map
         </h2>
-        <div id="map" style={{ height: "250px", backgroundColor: "#f1f1f1", borderRadius: "8px" }}> {/* Rounded corners */}
-          {/* Here you can integrate a map service like Google Maps or Mapbox */}
+        <div
+          id="map"
+          style={{
+            height: "250px",
+            backgroundColor: "#f1f1f1",
+            borderRadius: "8px",
+          }}
+        >
           <p className="text-center text-md">Interactive Map goes here.</p>
         </div>
       </section>

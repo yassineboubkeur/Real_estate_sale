@@ -1,65 +1,41 @@
-
-// authMiddleware.js
-const jwt = require('jsonwebtoken');
-
-const getUserFromToken = (token) => {
-  if (!token) return null;
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    return decoded.user;
-  } catch (error) {
-    console.error('Error verifying token:', error);
-    return null;
-  }
-};
-
+// middleware/authMiddleware.js
 const authenticateUser = (req, res, next) => {
-  const token = req.headers.authorization?.split(' ')[1]; // Format: "Bearer <token>"
-  const user = getUserFromToken(token);
-  if (!user) {
+  // Assuming you have a way to get the user ID from the request (e.g., from a JWT token)
+  const userId = req.user.id; // Adjust this based on your authentication setup
+
+  if (!userId) {
     return res.status(401).json({ message: 'Unauthorized' });
   }
-  req.user = user; // Attach the user to the request object
+
+  req.userId = userId; // Attach the user ID to the request object
   next();
 };
 
-module.exports = authenticateUser;
+const authorizePropertyAccess = (req, res, next) => {
+  const { id } = req.params; // Property ID from the URL
+  const userId = req.userId;
 
+  // Query the database to check if the property belongs to the user
+  const sql = 'SELECT user_id FROM properties WHERE id = ?';
+  db.query(sql, [id], (err, results) => {
+    if (err) {
+      return res.status(500).json({ message: 'Database error', error: err });
+    }
+    if (results.length === 0) {
+      return res.status(404).json({ message: 'Property not found' });
+    }
 
-// const jwt = require('jsonwebtoken'); // If using JWT for authentication
-// const db = require('../db'); // Import your database connection
+    const propertyUserId = results[0].user_id;
 
-// // Function to get user from token (example for JWT)
-// const getUserFromToken = (token) => {
-//   if (!token) return null;
+    if (propertyUserId !== userId) {
+      return res.status(403).json({ message: 'Forbidden: You do not have permission to access this property' });
+    }
 
-//   try {
-//     // Verify the token and decode the user information
-//     const decoded = jwt.verify(token, process.env.JWT_SECRET); // Replace with your secret key
-//     return decoded.user; // Assuming the token contains user information
-//   } catch (error) {
-//     console.error('Error verifying token:', error);
-//     return null;
-//   }
-// };
+    next();
+  });
+};
 
-// // Middleware to authenticate the user
-// const authenticateUser = (req, res, next) => {
-//   // Get the token from the request headers
-//   const token = req.headers.authorization?.split(' ')[1]; // Format: "Bearer <token>"
-
-//   // Verify the token and get the user
-//   const user = getUserFromToken(token);
-
-//   if (!user) {
-//     return res.status(401).json({ message: 'Unauthorized' });
-//   }
-
-//   // Attach the user to the request object
-//   req.user = user;
-//   next();
-// };
-
-// module.exports = {
-//   authenticateUser,
-// };
+module.exports = {
+  authenticateUser,
+  authorizePropertyAccess,
+};
