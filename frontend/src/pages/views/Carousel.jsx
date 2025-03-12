@@ -1,173 +1,88 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 const AutoCarouselWithCards = () => {
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  // Function to handle "More" button click
+  const handleMoreClick = (category) => {
+    // Navigate to a new page or update state to filter properties
+    navigate(`/properties?category=${category}`);
+  };
+
   return (
     <div className="container mt-5">
       <h2 className="text-center mb-4">Featured Properties</h2>
-      <div
-        id="carouselExampleAutoplaying"
-        className="carousel slide"
-        data-bs-ride="carousel"
-      >
-        <div className="carousel-inner">
-          {/* Slide 1 */}
-          <div className="carousel-item active" data-bs-interval="2000">
-            <div className="row">
-              {/* Card 1 */}
-              <div className="col-md-4">
-                <div className="card">
-                  <img
-                    src="https://via.placeholder.com/300"
-                    className="card-img-top"
-                    alt="Property 1"
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">Property 1</h5>
-                    <p className="card-text">
-                      Some quick example text about Property 1.
-                    </p>
-                    <a href="#" className="btn btn-primary">
-                      View Details
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 2 */}
-              <div className="col-md-4">
-                <div className="card">
-                  <img
-                    src="https://via.placeholder.com/300"
-                    className="card-img-top"
-                    alt="Property 2"
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">Property 2</h5>
-                    <p className="card-text">
-                      Some quick example text about Property 2.
-                    </p>
-                    <a href="#" className="btn btn-primary">
-                      View Details
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 3 */}
-              <div className="col-md-4">
-                <div className="card">
-                  <img
-                    src="https://via.placeholder.com/300"
-                    className="card-img-top"
-                    alt="Property 3"
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">Property 3</h5>
-                    <p className="card-text">
-                      Some quick example text about Property 3.
-                    </p>
-                    <a href="#" className="btn btn-primary">
-                      View Details
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Slide 2 */}
-          <div className="carousel-item" data-bs-interval="3000">
-            <div className="row">
-              {/* Card 4 */}
-              <div className="col-md-4">
-                <div className="card">
-                  <img
-                    src="https://via.placeholder.com/300"
-                    className="card-img-top"
-                    alt="Property 4"
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">Property 4</h5>
-                    <p className="card-text">
-                      Some quick example text about Property 4.
-                    </p>
-                    <a href="#" className="btn btn-primary">
-                      View Details
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 5 */}
-              <div className="col-md-4">
-                <div className="card">
-                  <img
-                    src="https://via.placeholder.com/300"
-                    className="card-img-top"
-                    alt="Property 5"
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">Property 5</h5>
-                    <p className="card-text">
-                      Some quick example text about Property 5.
-                    </p>
-                    <a href="#" className="btn btn-primary">
-                      View Details
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 6 */}
-              <div className="col-md-4">
-                <div className="card">
-                  <img
-                    src="https://via.placeholder.com/300"
-                    className="card-img-top"
-                    alt="Property 6"
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">Property 6</h5>
-                    <p className="card-text">
-                      Some quick example text about Property 6.
-                    </p>
-                    <a href="#" className="btn btn-primary">
-                      View Details
-                    </a>
-                  </div>
-                </div>
-              </div>
+      <div className="row">
+        {/* Apartment Card */}
+        <div className="col-md-4">
+          <div className="card">
+            <img
+              src="https://images.pexels.com/photos/323705/pexels-photo-323705.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              className="card-img-top"
+              alt="Apartment"
+            />
+            <div className="card-body">
+              <h5 className="card-title">Apartment</h5>
+              <p className="card-text">
+                Some quick example text about the apartment.
+              </p>
+              <button
+                className="btn btn-primary"
+                onClick={() => handleMoreClick("apartment")} // Pass category
+              >
+                More
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Carousel Controls */}
-        <button
-          className="carousel-control-prev"
-          type="button"
-          data-bs-target="#carouselExampleAutoplaying"
-          data-bs-slide="prev"
-        >
-          <span
-            className="carousel-control-prev-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="visually-hidden">Previous</span>
-        </button>
-        <button
-          className="carousel-control-next"
-          type="button"
-          data-bs-target="#carouselExampleAutoplaying"
-          data-bs-slide="next"
-        >
-          <span
-            className="carousel-control-next-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="visually-hidden">Next</span>
-        </button>
+        {/* House Card */}
+        <div className="col-md-4">
+          <div className="card">
+            <img
+              src="https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              className="card-img-top"
+              alt="House"
+            />
+            <div className="card-body">
+              <h5 className="card-title">House</h5>
+              <p className="card-text">
+                Some quick example text about the house.
+              </p>
+              <button
+                className="btn btn-primary"
+                onClick={() => handleMoreClick("house")} // Pass category
+              >
+                More
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Villa Card */}
+        <div className="col-md-4">
+          <div className="card">
+            <img
+              src="https://images.pexels.com/photos/5997992/pexels-photo-5997992.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              className="card-img-top"
+              alt="Villa"
+            />
+            <div className="card-body">
+              <h5 className="card-title">Villa</h5>
+              <p className="card-text">
+                Some quick example text about the villa.
+              </p>
+              <button
+                className="btn btn-primary"
+                onClick={() => handleMoreClick("villa")} // Pass category
+              >
+                More
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

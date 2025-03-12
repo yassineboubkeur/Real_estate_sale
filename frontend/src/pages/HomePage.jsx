@@ -95,10 +95,8 @@ const HomePage = () => {
       </div>
 
       {/* Carousel Section */}
-      <AutoCarouselWithCards />
-
-      {/* Search Section */}
-      <section className="py-3" style={{ backgroundColor: "#f8f9fa" }}>
+       {/* Search Section */}
+       <section className="py-3" >
         <div
           className="container p-3 text-center"
           style={{
@@ -151,6 +149,9 @@ const HomePage = () => {
           </button>
         </div>
       </section>
+      <AutoCarouselWithCards />
+
+     
 
       {/* Recently Added Properties */}
       <section
@@ -212,7 +213,7 @@ const HomePage = () => {
       </section>
 
       {/* Interactive Map Section */}
-      <section
+      {/* <section
         className="container p-3 my-3"
         style={{
           background:
@@ -237,7 +238,7 @@ const HomePage = () => {
         >
           <p className="text-center text-md">Interactive Map goes here.</p>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

@@ -10,7 +10,7 @@ const Layout = () => {
         <NavBar />
       </div>
     
-      <main>
+      <main className="py-4">
         {/* Le composant Outlet permet d'afficher le contenu des pages spécifiques */}
         <Outlet />
       </main>

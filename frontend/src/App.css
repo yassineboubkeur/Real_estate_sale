@@ -1,7 +1,8 @@
 /* General Styles */
 body {
   font-family: 'Arial', sans-serif;
-  background-image: url("images/bg22.svg");
+  /* background-image: url("images/bg22.svg"); */
+  background-color: #f0f0d8;
 }
 
 /* Global CSS */
@@ -278,4 +279,8 @@ html, body {
 .bi-google,
 .bi-facebook {
   font-size: 1.2rem;
+}
+
+.pink-input {
+  color: rgb(25, 7, 129);
 }

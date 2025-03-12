@@ -1,11 +1,11 @@
-
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom"; // Import Link for navigation
-const user = JSON.parse(localStorage.getItem('userr')); // Retrieve user object
+import { Link, useLocation } from "react-router-dom"; // Import useLocation for query params
+
+// Retrieve user information from localStorage
+const user = JSON.parse(localStorage.getItem('userr'));
 const loggedInUserId = user ? user.id : null; // Extract user ID
 const token = user ? user.token : null; // Extract token
 
-// const loggedInUserId = localStorage.getItem('userr').id;
 const PropertyCard = ({ property, onDelete, loggedInUserId }) => (
   <div className="col-md-4 mb-3">
     <div className="card h-100 shadow-sm border-0">
@@ -21,7 +21,7 @@ const PropertyCard = ({ property, onDelete, loggedInUserId }) => (
         </h5>
         <p className="card-text text-muted small">{property.description}</p>
         <p className="card-text h6 text-primary font-weight-bold">
-          {property.price}
+          ${property.price}
         </p>
 
         {/* Conditionally render "Update" and "Delete" buttons */}
@@ -62,10 +62,10 @@ const PropertiesPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [allProperties, setAllProperties] = useState([]);
 
-  // Retrieve user information from localStorage
-  const user = JSON.parse(localStorage.getItem('userr'));
-  const loggedInUserId = user ? user.id : null; // Extract user ID
-  const token = user ? user.token : null; // Extract token
+  // Use useLocation to get the query parameters
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const category = queryParams.get("category"); // Get the category from the URL
 
   // Fetch properties from the backend
   useEffect(() => {
@@ -81,23 +81,30 @@ const PropertiesPage = () => {
         }
         const data = await response.json();
         setAllProperties(data.properties); // Set all properties
-        setFilteredProperties(data.properties); // Set filtered properties to the fetched data
-        console.log(data.properties); // Log fetched data for debugging
+
+        // Filter properties based on the category (if provided)
+        if (category) {
+          const filtered = data.properties.filter(
+            (property) => property.category === category
+          );
+          setFilteredProperties(filtered);
+        } else {
+          setFilteredProperties(data.properties); // Set filtered properties to all properties
+        }
       } catch (error) {
         console.error("Error fetching properties:", error);
       }
     };
 
     fetchProperties();
-  }, [token]);
+  }, [token, category]); // Add category to the dependency array
 
   const handleFilter = () => {
     const filterValue = searchQuery.trim().toLowerCase();
     setFilteredProperties(
       allProperties.filter((property) =>
         property.title.toLowerCase().includes(filterValue)
-      )
-    );
+    ))
   };
 
   const handleKeyPress = (e) => {
@@ -110,12 +117,12 @@ const PropertiesPage = () => {
     try {
       const user = JSON.parse(localStorage.getItem('userr')); // Retrieve user object
       const userId = user ? user.id : null; // Extract user ID
-  
+
       if (!userId) {
         console.error('User ID not found. Please log in again.');
         return;
       }
-  
+
       const response = await fetch(
         `http://localhost:3000/api/properties/delete/${id}`,
         {
@@ -126,7 +133,7 @@ const PropertiesPage = () => {
           body: JSON.stringify({ user_id: userId }), // Pass user_id in the request body
         }
       );
-  
+
       if (response.ok) {
         // Remove the deleted property from the state
         setAllProperties(allProperties.filter((property) => property.id !== id));
@@ -139,13 +146,16 @@ const PropertiesPage = () => {
       console.error('Error deleting property:', error);
     }
   };
+
   return (
     <div className="container mt-3">
       <h2 className="text-center mb-3 h3 font-weight-bold">
-        Explore Our Properties
+        {category ? `${category.charAt(0).toUpperCase() + category.slice(1)} Properties` : "Explore Our Properties"}
       </h2>
       <p className="text-center text-muted mb-3 small">
-        Discover your dream home from our curated collection of properties.
+        {category
+          ? `Discover our curated collection of ${category} properties.`
+          : "Discover your dream home from our curated collection of properties."}
       </p>
 
       {/* Search Bar with Button */}
