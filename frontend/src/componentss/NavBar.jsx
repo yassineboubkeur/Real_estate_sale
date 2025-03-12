@@ -28,8 +28,8 @@ const NavBar = () => {
             {/* Logo */}
             <Link className="navbar-brand" to="/">
               <div className="logo">
-                <span className="logo-highlight animated-logo">Get</span>
-                <span className="bg-danger animated-logo">House</span>
+         
+              <img className=' logoicon' src="../images/logoreal.png" alt="logoreal" />
               </div>
               <style jsx>{`
                 .logo {
@@ -38,6 +38,7 @@ const NavBar = () => {
                   display: inline-block;
                   cursor: pointer;
                 }
+                
                 .logo-highlight {
                   color: #007bff; /* Blue color for "Get" */
                 }
