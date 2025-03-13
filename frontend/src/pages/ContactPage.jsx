@@ -1,26 +1,52 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 const ContactUsPage = () => {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-    phone: "",
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+    phone: '',
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here (e.g., API call or form handling)
-    console.log("Contact Us Form Submitted", formData);
-    setSubmitted(true);
+
+    try {
+      const response = await fetch('http://localhost:3000/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: '',
+          phone: '',
+        });
+        setError('');
+      } else {
+        const data = await response.json();
+        setError(data.message || 'Failed to submit form');
+      }
+    } catch (error) {
+      setError('Error submitting form. Please try again.');
+      console.error('Error submitting form:', error);
+    }
   };
 
   return (
@@ -31,6 +57,13 @@ const ContactUsPage = () => {
       {submitted && (
         <div className="alert alert-success text-center" role="alert">
           Your message has been sent successfully! We'll get back to you soon.
+        </div>
+      )}
+
+      {/* Error Message */}
+      {error && (
+        <div className="alert alert-danger text-center" role="alert">
+          {error}
         </div>
       )}
 
@@ -116,7 +149,6 @@ const ContactUsPage = () => {
 
       <div className="mt-5 text-center">
         <h4>Our Location</h4>
-        {/* Example of a Google Maps iframe */}
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3131.724658767197!2d-122.40207408468127!3d37.78442077975731!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858091d5ec50c5%3A0x99f313fe5fa9db08!2sGoogleplex!5e0!3m2!1sen!2sus!4v1617119256360!5m2!1sen!2sus"
           width="600"

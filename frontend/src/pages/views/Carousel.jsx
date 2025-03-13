@@ -16,7 +16,7 @@ const AutoCarouselWithCards = () => {
       <h2 className="text-center mb-4">Featured Properties</h2>
       <div className="row">
         {/* Apartment Card */}
-        <div className="col-md-4">
+        <div className="col-md-4 ">
           <div className="card">
             <img
               src="https://images.pexels.com/photos/323705/pexels-photo-323705.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -39,7 +39,7 @@ const AutoCarouselWithCards = () => {
         </div>
 
         {/* House Card */}
-        <div className="col-md-4">
+        <div className="col-md-4 ">
           <div className="card">
             <img
               src="https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -62,7 +62,7 @@ const AutoCarouselWithCards = () => {
         </div>
 
         {/* Villa Card */}
-        <div className="col-md-4">
+        <div className="col-md-4 ">
           <div className="card">
             <img
               src="https://images.pexels.com/photos/5997992/pexels-photo-5997992.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"

@@ -6,6 +6,7 @@ const fs = require("fs");
 const path = require("path"); // Import the path module
 const userRoutes = require("./routes/userRoutes.js"); // Import user routes
 const propertyRoutes = require("./routes/propertyRoutes.js"); // Import property routes
+const contactusRoutes = require("./routes/contactusRoutes.js");
 
 // Load Firebase service account credentials
 const serviceAccount = require("./realestate-bc6ed-firebase-adminsdk-k8ni4-3b658ac1de.json");
@@ -46,6 +47,8 @@ app.use("/api/users", userRoutes);
 
 // Use property routes
 app.use("/api/properties", propertyRoutes);
+
+app.use("/api/", contactusRoutes);
 
 // Firebase token verification endpoint
 app.post("/verifyToken", async (req, res) => {

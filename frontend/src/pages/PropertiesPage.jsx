@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom"; // Import useLocation for query params
+import { useAuth } from '../auth/AuthContext'; // Import useAuth hook
 
 // Retrieve user information from localStorage
 const user = JSON.parse(localStorage.getItem('userr'));
@@ -19,7 +20,7 @@ const PropertyCard = ({ property, onDelete, loggedInUserId }) => (
         <h5 className="card-title font-weight-bold" style={{ fontSize: "1rem" }}>
           {property.title}
         </h5>
-        <p className="card-text text-muted small">{property.description}</p>
+        <p className="card-text text-muted small">{property.description.slice(0,30)}...</p>
         <p className="card-text h6 text-primary font-weight-bold">
           ${property.price}
         </p>
@@ -58,6 +59,7 @@ const PropertyCard = ({ property, onDelete, loggedInUserId }) => (
 );
 
 const PropertiesPage = () => {
+  const { isAuthenticated } = useAuth(); // Get authentication state
   const [filteredProperties, setFilteredProperties] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [allProperties, setAllProperties] = useState([]);
@@ -68,36 +70,37 @@ const PropertiesPage = () => {
   const category = queryParams.get("category"); // Get the category from the URL
 
   // Fetch properties from the backend
-  useEffect(() => {
-    const fetchProperties = async () => {
-      try {
-        const response = await fetch("http://localhost:3000/api/properties/all", {
-          headers: {
-            Authorization: `Bearer ${token}`, // Include the token in the request
-          },
-        });
-        if (!response.ok) {
-          throw new Error("Failed to fetch properties");
-        }
-        const data = await response.json();
-        setAllProperties(data.properties); // Set all properties
-
-        // Filter properties based on the category (if provided)
-        if (category) {
-          const filtered = data.properties.filter(
-            (property) => property.category === category
-          );
-          setFilteredProperties(filtered);
-        } else {
-          setFilteredProperties(data.properties); // Set filtered properties to all properties
-        }
-      } catch (error) {
-        console.error("Error fetching properties:", error);
+  const fetchProperties = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/api/properties/all", {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token in the request
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Failed to fetch properties");
       }
-    };
+      const data = await response.json();
+      setAllProperties(data.properties); // Set all properties
 
+      // Filter properties based on the category (if provided)
+      if (category) {
+        const filtered = data.properties.filter(
+          (property) => property.category === category
+        );
+        setFilteredProperties(filtered);
+      } else {
+        setFilteredProperties(data.properties); // Set filtered properties to all properties
+      }
+    } catch (error) {
+      console.error("Error fetching properties:", error);
+    }
+  };
+
+  // Fetch properties when the component mounts or when authentication state changes
+  useEffect(() => {
     fetchProperties();
-  }, [token, category]); // Add category to the dependency array
+  }, [isAuthenticated, category]); // Add isAuthenticated to the dependency array
 
   const handleFilter = () => {
     const filterValue = searchQuery.trim().toLowerCase();

@@ -41,7 +41,7 @@ const HomePage = () => {
         className="bg-image shadow-2-strong"
         style={{
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${buildingImage})`,
-          height: "50vh",
+          height: "80vh",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",

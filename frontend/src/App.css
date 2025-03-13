@@ -2,7 +2,7 @@
 body {
   font-family: 'Arial', sans-serif;
   /* background-image: url("images/bg22.svg"); */
-  background-color: #f0f0d8;
+  background-color: #ececec;
 }
 
 /* Global CSS */
@@ -245,6 +245,10 @@ html, body {
 .card {
   border: none;
   border-radius: 15px;
+  box-shadow: 0 0px 6px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+
 }
 
 .btn-primary {
@@ -287,4 +291,32 @@ html, body {
 .logoreal{
   width: 50px;
   height: 50px;
+}
+
+/*  */
+
+
+.professional-card {
+  /* Basic styling */
+  width: 300px;
+  height: 200px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  /* Optional: Center content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.card:hover {
+  /* Scale effect on hover */
+  transform: scale(1.05);
+
+  /* Enhanced shadow on hover */
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.15);
 }
