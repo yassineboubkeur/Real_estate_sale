@@ -2,11 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom"; // Import useLocation for query params
 import { useAuth } from '../auth/AuthContext'; // Import useAuth hook
 
-// Retrieve user information from localStorage
-const user = JSON.parse(localStorage.getItem('userr'));
-const loggedInUserId = user ? user.id : null; // Extract user ID
-const token = user ? user.token : null; // Extract token
-
 const PropertyCard = ({ property, onDelete, loggedInUserId }) => (
   <div className="col-md-4 mb-3">
     <div className="card h-100 shadow-sm border-0">
@@ -20,7 +15,7 @@ const PropertyCard = ({ property, onDelete, loggedInUserId }) => (
         <h5 className="card-title font-weight-bold" style={{ fontSize: "1rem" }}>
           {property.title}
         </h5>
-        <p className="card-text text-muted small">{property.description.slice(0,30)}...</p>
+        <p className="card-text text-muted small">{property.description.slice(0, 30)}...</p>
         <p className="card-text h6 text-primary font-weight-bold">
           ${property.price}
         </p>
@@ -69,6 +64,11 @@ const PropertiesPage = () => {
   const queryParams = new URLSearchParams(location.search);
   const category = queryParams.get("category"); // Get the category from the URL
 
+  // Retrieve user information from localStorage
+  const user = JSON.parse(localStorage.getItem('userr'));
+  const loggedInUserId = user ? user.id : null; // Extract user ID
+  const token = user ? user.token : null; // Extract token
+
   // Fetch properties from the backend
   const fetchProperties = async () => {
     try {
@@ -107,7 +107,8 @@ const PropertiesPage = () => {
     setFilteredProperties(
       allProperties.filter((property) =>
         property.title.toLowerCase().includes(filterValue)
-    ))
+      )
+    );
   };
 
   const handleKeyPress = (e) => {

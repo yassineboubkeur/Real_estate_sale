@@ -112,7 +112,7 @@ const HomePage = () => {
           >
             Find Your Dream Property
           </h2>
-          <div className="row">
+          <div className="row gap-4">
             <div className="col-md-4 mb-2">
               <input
                 type="text"
@@ -149,6 +149,7 @@ const HomePage = () => {
           </button>
         </div>
       </section>
+
       <AutoCarouselWithCards />
 
      
@@ -173,7 +174,7 @@ const HomePage = () => {
         <div className="row">
           {recentProperties.length > 0 ? (
             recentProperties.map((property) => (
-              <div className="col-md-4 mb-3" key={property.id}>
+              <div className="col-md-4 card2 mb-3" key={property.id}>
                 <div className="card h-100 shadow-sm border-0">
                   <img
                     src={`http://localhost:3000/uploads/${property.picture}`}
